@@ -1,11 +1,17 @@
-<script setup></script>
+<script setup>
+import { RouterView } from 'vue-router'
+import ComponentNavbar from '@/components/layout/ComponentNavbar.vue'
+import ComponentFooter from '@/components/layout/ComponentFooter.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-</template>
+  <div class="flex min-h-screen flex-col bg-white dark:bg-zinc-950">
+    <ComponentNavbar />
 
-<style scoped></style>
+    <main class="flex-1">
+      <RouterView />
+    </main>
+
+    <ComponentFooter />
+  </div>
+</template>
