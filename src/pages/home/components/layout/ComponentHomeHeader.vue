@@ -1,5 +1,5 @@
 <script setup>
-// Static layout shell: no JavaScript logic by design.
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -31,19 +31,19 @@
         </p>
 
         <div class="mt-10 flex flex-wrap items-center gap-4">
-          <a
-            href="#"
+          <RouterLink
+            to="/projects"
             class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-400"
           >
             Projeleri incele
-          </a>
+          </RouterLink>
 
-          <a
-            href="#"
+          <RouterLink
+            to="/blogs"
             class="inline-flex items-center justify-center rounded-md border border-zinc-200 px-5 py-3 text-sm font-medium text-zinc-900 transition-colors hover:text-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:border-zinc-800 dark:text-zinc-50 dark:hover:text-indigo-400 dark:focus-visible:outline-indigo-400"
           >
             Yazıları oku
-          </a>
+          </RouterLink>
         </div>
       </div>
 

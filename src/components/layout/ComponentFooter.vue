@@ -1,4 +1,5 @@
 <script setup>
+import config from '@/config';
 import { RouterLink } from 'vue-router'
 </script>
 
@@ -25,15 +26,14 @@ import { RouterLink } from 'vue-router'
           </RouterLink>
 
           <p class="mt-6 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            Web ve gömülü sistemler geliştiricisi. Projeye göre mimari kurar; hızlı, sürdürülebilir
-            ve gereksiz mühendislikten uzak çözümler geliştirir.
+            {{ config.slogan }}
           </p>
 
           <a
-            href="mailto:iletisim@kutayertug.com"
+            :href="`mailto:${config.contacts.email}`"
             class="mt-6 inline-block rounded-md font-mono text-sm text-zinc-900 underline-offset-4 transition-colors hover:text-indigo-600 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-zinc-50 dark:hover:text-indigo-400 dark:focus-visible:outline-indigo-400"
           >
-            iletisim@kutayertug.com
+            {{ config.contacts.email }}
           </a>
         </div>
 
