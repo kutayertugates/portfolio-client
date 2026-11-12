@@ -53,7 +53,7 @@ import { RouterLink } from 'vue-router'
         </RouterLink>
 
         <RouterLink
-          to="/blog"
+          to="/blogs"
           class="rounded-md px-3 py-3 text-sm font-medium text-zinc-600 transition-colors hover:text-indigo-600 hover:underline hover:underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 aria-[current=page]:font-semibold aria-[current=page]:text-indigo-600 md:px-0 md:py-0 dark:text-zinc-400 dark:hover:text-indigo-400 dark:focus-visible:outline-indigo-400 dark:aria-[current=page]:text-indigo-400"
         >
           Blog

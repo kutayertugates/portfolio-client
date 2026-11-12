@@ -61,7 +61,7 @@ import { RouterLink } from 'vue-router'
             </li>
             <li>
               <RouterLink
-                to="/blog"
+                to="/blogs"
                 class="inline-block rounded-md py-1 text-sm text-zinc-600 transition-colors hover:text-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 aria-[current=page]:font-semibold aria-[current=page]:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 dark:focus-visible:outline-indigo-400 dark:aria-[current=page]:text-indigo-400"
               >
                 Blog

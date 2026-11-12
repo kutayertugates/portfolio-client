@@ -3,19 +3,19 @@ import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router'
 import config from "@/config";
 
-import ComponentBlogItem from "@/pages/home/components/blog/ComponentBlogItem.vue"
+import ComponentBlogItem from "@/pages/home/components/blog/ComponentHomeBlogItem.vue"
+
+const blogs = ref([]);
 
 async function getLastBlogPost() {
   let response = await fetch(config.API_BASE_URL + "/blogs?limit=3");
   let result = await response.json();
 
-  return result.data;
+  blogs.value = result.data;
 }
 
-const blogs = ref([]);
-
 onMounted(async () => {
-  blogs.value = await getLastBlogPost();
+  await getLastBlogPost();
 });
 
 </script>
@@ -46,7 +46,7 @@ onMounted(async () => {
         </div>
 
         <RouterLink
-          to="/blog"
+          to="/blogs"
           class="inline-flex shrink-0 items-center rounded-md text-sm font-medium text-indigo-600 underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:focus-visible:outline-indigo-400"
         >
           Tüm yazılar
@@ -72,7 +72,7 @@ onMounted(async () => {
         </p>
 
         <RouterLink
-          to="/blog"
+          to="/blogs"
           class="mt-6 inline-flex items-center rounded-md text-sm font-medium text-indigo-600 underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:focus-visible:outline-indigo-400"
         >
           Bloğa git
