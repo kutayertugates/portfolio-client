@@ -1,17 +1,22 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router'
-import config from "@/config";
 
+import { BlogService } from '@/services/blog.service';
+
+import ComponentHomeBlogEmpty from '../blog/ComponentHomeBlogEmpty.vue';
 import ComponentBlogItem from "@/pages/home/components/blog/ComponentHomeBlogItem.vue"
+import ComponentHomeBlogTempItem from '../blog/ComponentHomeBlogTempItem.vue';
 
 const blogs = ref([]);
 
+const loading = ref(true)
+
 async function getLastBlogPost() {
-  let response = await fetch(config.API_BASE_URL + "/blogs?limit=3");
-  let result = await response.json();
+  let result = await BlogService.getAll(1, 3)
 
   blogs.value = result.data;
+  loading.value = false
 }
 
 onMounted(async () => {
@@ -53,30 +58,19 @@ onMounted(async () => {
         </RouterLink>
       </div>
 
-      <div v-if="blogs.length !== 0" class="mt-12 flex flex-col gap-6">
-        <ComponentBlogItem v-for="blog in blogs" :key="blog.id" :data="blog" />
+      <!-- Loading -->
+      <div class="mt-12 flex flex-col gap-6" v-if="loading" >
+        <ComponentHomeBlogTempItem />
       </div>
 
-      <div
-        v-else
-        class="mt-12 rounded-md border border-dashed border-zinc-200 bg-zinc-50 px-6 py-16 text-center dark:border-zinc-800 dark:bg-zinc-900"
-      >
-        <p class="font-mono text-xs uppercase tracking-widest text-zinc-500">Henüz yayınlanmış yazı yok</p>
+      <!-- Empty -->
+      <div class="mt-12 flex flex-col gap-6" v-else-if="blogs.length === 0">
+        <ComponentHomeBlogEmpty />
+      </div>
 
-        <p class="mt-4 text-base text-zinc-900 dark:text-zinc-50">
-          Henüz bir blog yazısı bulunamadı.
-        </p>
-
-        <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-          Yeni yazılar yayınlandıkça burada listelenecek. Bu arada diğer yazılara göz atabilirsiniz.
-        </p>
-
-        <RouterLink
-          to="/blogs"
-          class="mt-6 inline-flex items-center rounded-md text-sm font-medium text-indigo-600 underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:focus-visible:outline-indigo-400"
-        >
-          Bloğa git
-        </RouterLink>
+      <!-- Blogs -->
+      <div class="mt-12 flex flex-col gap-6" v-else>
+        <ComponentBlogItem v-for="blog in blogs" :key="blog.id" :data="blog" />
       </div>
 
     </div>
