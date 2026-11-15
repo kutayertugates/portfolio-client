@@ -72,7 +72,7 @@ onMounted(async () => {
         </p>
 
         <RouterLink
-          :to="`/blog/${props.data.slug}`"
+          :to="`/blogs/${props.data.slug}`"
           class="mt-6 inline-flex items-center rounded-md text-sm font-medium text-indigo-600 underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:focus-visible:outline-indigo-400"
         >
           Yazıyı oku

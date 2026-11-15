@@ -84,7 +84,7 @@ onMounted(async () => {
           class="max-w-2xl text-balance text-2xl font-semibold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-50"
         >
           <RouterLink
-            to="/blogs/lorem-ipsum-dolor-sit-amet"
+            :to="`/blogs/${props.data.slug}`"
             class="rounded-md underline-offset-4 transition-colors hover:text-indigo-600 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-indigo-400 dark:focus-visible:outline-indigo-400"
           >
             {{ props.data.title }}
@@ -96,7 +96,7 @@ onMounted(async () => {
         </p>
 
         <RouterLink
-          :to="`/blog/${props.data.slug}`"
+          :to="`/blogs/${props.data.slug}`"
           class="mt-8 inline-flex w-fit items-center gap-2 rounded-md text-sm font-medium text-indigo-600 underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-indigo-400 dark:focus-visible:outline-indigo-400"
         >
           Yazıyı oku
