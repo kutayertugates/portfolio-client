@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { RouterLink } from 'vue-router'
-import config from '@/config';
+import { UserService } from '@/services/user.service';
 
 const props = defineProps({
   data: {
@@ -30,17 +30,11 @@ const published_at = computed(() => {
   });
 })
 
-async function getAuthor(id) {
-  let response = await fetch(config.API_BASE_URL + "/user/" + parseInt(id));
-  let result = await response.json();
-
-  return result["data"];
-}
 
 onMounted(async () => {
-  author.value = await getAuthor(props.data.author_id);
+  let author_response = await UserService.getById(props.data.author_id)
+  author.value = author_response.data
 })
-
 </script>
 
 <template>
