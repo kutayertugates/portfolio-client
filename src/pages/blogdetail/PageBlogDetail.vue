@@ -2,7 +2,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { RouterLink } from 'vue-router'
 import { useRouter, useRoute } from 'vue-router';
-import config from '@/config';
+import { BlogService } from '@/services/blog.service'
+import { UserService } from '@/services/user.service'
 
 const route = useRoute()
 const router = useRouter()
@@ -39,32 +40,17 @@ const published_at = computed(() => {
   });
 })
 
-async function getBlogDetailWithSlug(slug) {
-  let response = await fetch(config.API_BASE_URL + "/blogs/slug/" + slug)
-  let result = await response.json()
-
-  if (Object.keys(result.data).length === 0) {
-    return null
-  }
-
-  return result.data
-}
-
-async function getBlogAuthor(author_id) {
-  let response = await fetch(config.API_BASE_URL + "/user/" + author_id)
-  let result = await response.json()
-
-  if (Object.keys(result.data).length === 0) {
-    return null
-  }
-
-  return result.data
-}
 
 onMounted(async () => {
-  let slug = route.params.slug
-  blog.value = await getBlogDetailWithSlug(slug)
-  author.value = await getBlogAuthor(blog.value.author_id)
+  let blog_response = await BlogService.getBySlug(route.params.slug)
+  if (Object.keys(blog_response.data).length !== 0) {
+    blog.value = blog_response.data
+  }
+
+  let author_response = await UserService.getById(blog.value.author_id)
+  if (Object.keys(author_response.data).length !== 0) {
+    author.value = author_response.data
+  }
 
   if (blog.value === null || author.value === null) {
     loading.value = false
@@ -73,10 +59,7 @@ onMounted(async () => {
   }
 
   loading.value = false
-
-  blog
 })
-
 </script>
 
 <template>
