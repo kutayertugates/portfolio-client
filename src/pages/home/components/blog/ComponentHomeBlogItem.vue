@@ -1,6 +1,6 @@
 <script setup>
-import config from '@/config';
 import { ref, onMounted, computed } from 'vue';
+import { UserService } from '@/services/user.service';
 
 const props = defineProps({
   data: {
@@ -30,10 +30,9 @@ const published_at = computed(() => {
 })
 
 async function getAuthor(id) {
-  let response = await fetch(config.API_BASE_URL + "/user/" + parseInt(id));
-  let result = await response.json();
+  let result = await UserService.getById(parseInt(id))
 
-  return result["data"];
+  return result.data;
 }
 
 onMounted(async () => {
